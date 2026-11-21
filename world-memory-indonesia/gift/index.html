@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>☕ Kopi untukmu · World Memory: Nusantara</title>
+<meta name="description" content="Temanmu mengirim secangkir kopi di World Memory: Nusantara. 친구가 월드 메모리 커피를 보냈어요. A friend sent you a coffee.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="World Memory: Nusantara">
+<meta property="og:title" content="☕ Ada kopi untukmu! · 커피 선물이 도착했어요">
+<meta property="og:description" content="Ketuk untuk menerima kopi di World Memory, puzzle sejarah Indonesia. · 눌러서 월드 메모리에서 커피를 받으세요.">
+<meta property="og:image" content="https://lemondkel.github.io/world-memory-indonesia/gift/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#c8102e">
+<link rel="icon" href="icon.png">
+<style>
+  :root { --verde: #2e7d4f; --verde-esc: #1b5233; --ouro: #e0a526; --papel: #fff7ea; --tinta: #3a2414; --tinta2: #6e5038; --rosa: #c8102e; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; color: var(--tinta);
+    background: radial-gradient(circle at 50% 0%, #e2453c, #c8102e 38%, #5c1a12); display: flex; justify-content: center; padding: 24px 16px 40px; }
+  main { width: min(440px, 100%); }
+  .brand { display: flex; align-items: center; gap: 10px; color: #fff; margin-bottom: 14px; }
+  .brand img { width: 44px; height: 44px; border-radius: 12px; box-shadow: 0 3px 0 rgba(0,0,0,.25); }
+  .brand b { display: block; font-size: 17px; }
+  .brand small { opacity: .85; font-size: 13px; }
+  .card { background: var(--papel); border-radius: 28px; padding: 18px 18px 22px; box-shadow: 0 10px 0 rgba(0,0,0,.2), 0 20px 40px rgba(0,0,0,.35); text-align: center; }
+  .art { position: relative; height: 170px; display: flex; align-items: center; justify-content: center; }
+  .rays { position: absolute; width: 210px; height: 210px; border-radius: 50%; background: repeating-conic-gradient(rgba(224,165,38,.38) 0 12deg, transparent 12deg 24deg); animation: spin 10s linear infinite;
+    -webkit-mask: radial-gradient(circle, #000 35%, transparent 70%); mask: radial-gradient(circle, #000 35%, transparent 70%); }
+  .av { position: relative; z-index: 1; width: 108px; height: 108px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, #f3e2c2); border: 4px solid #fff; box-shadow: 0 6px 0 rgba(0,0,0,.15); display: flex; align-items: center; justify-content: center; font-size: 64px; }
+  .cup { position: absolute; z-index: 2; left: calc(50% + 30px); top: 92px; font-size: 52px; animation: drop .8s cubic-bezier(.2,1.6,.4,1) both .2s; }
+  h1 { font-size: 26px; margin: 6px 0 4px; line-height: 1.2; }
+  .who { font-size: 18px; font-weight: 700; margin: 0 0 4px; }
+  .muted { color: var(--tinta2); font-size: 14px; margin: 4px 0; }
+  .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 56px; margin-top: 12px; border-radius: 18px; border: 0; font: inherit; font-size: 19px; font-weight: 800; color: #fff; text-decoration: none; cursor: pointer;
+    background: linear-gradient(#f0b24a, #c77d16); box-shadow: 0 5px 0 #7a4a08, 0 8px 18px rgba(0,0,0,.2); }
+  .btn.green { background: linear-gradient(#3aa36a, var(--verde)); box-shadow: 0 5px 0 var(--verde-esc), 0 8px 18px rgba(0,0,0,.2); }
+  .btn.gray { background: linear-gradient(#b0b6bd, #858c94); box-shadow: 0 5px 0 #5a6068; font-size: 16px; min-height: 46px; }
+  .btn:active { transform: translateY(4px); box-shadow: none; }
+  .steps { text-align: left; background: #fff; border-radius: 16px; padding: 10px 14px 10px 32px; margin: 14px 0 0; font-size: 14px; line-height: 1.55; }
+  .hidden { display: none !important; }
+  footer { color: rgba(255,255,255,.8); font-size: 12px; text-align: center; margin-top: 18px; }
+  footer a { color: #fff; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes drop { from { transform: translateY(-60px) scale(.4) rotate(-30deg); opacity: 0; } to { transform: none; opacity: 1; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand"><img src="icon.png" alt=""><div><b id="app">World Memory</b><small id="sub">Nusantara</small></div></div>
+  <div class="card">
+    <div class="art"><div class="rays"></div><div class="av" id="av">☕</div><span class="cup" id="cup">☕</span></div>
+    <h1 id="title"></h1>
+    <p class="who" id="who"></p>
+    <p class="muted" id="meta"></p>
+    <a class="btn" id="open" href="#"></a>
+    <a class="btn green" id="install" href="#"></a>
+    <button class="btn gray hidden" id="copy"></button>
+    <ol class="steps" id="steps"></ol>
+  </div>
+  <footer><span id="foot"></span> · <a href="https://lemondkel.github.io/world-memory-privacy/world-memory-indonesia/privacy.html">Privacy</a></footer>
+</main>
+<script>
+(function () {
+  'use strict';
+  var PKG = 'com.lemondkel.worldmemory.indonesia';
+  var AV = ['🦜', '🐆', '🐒', '🦥', '🐢', '🌺', '⚽', '🎭', '☕', '🌴', '🦋', '🐬'];
+  var T = {
+    id: {
+      app: 'World Memory', sub: 'Nusantara',
+      gTitle: 'Kopi datang!', gWho: '{name} mengirim secangkir kopi',
+      qTitle: 'Permintaan kopi', qWho: '{name} minta secangkir kopi',
+      noTitle: 'Jelajahi sejarah Nusantara', noWho: '200 momen sejarah Indonesia dalam puzzle cocok-3',
+      meta: 'Level {s} · ★{st}', left: 'Terima dalam {d} hari', expired: 'Link ini sudah lewat 7 hari. Minta link baru ke temanmu.',
+      openG: '☕ Terima kopi di aplikasi', openQ: '☕ Kirim kopi di aplikasi', openNo: 'Buka aplikasi',
+      install: 'Pasang dari Google Play', installIos: 'Versi iPhone segera hadir',
+      copy: 'Salin link', copied: 'Tersalin!',
+      desktop: 'Buka link ini di ponsel.',
+      s1: 'Kalau gim sudah terpasang, tombol di atas langsung memasukkan kopi ke kotak kopi.',
+      s2: 'Kalau belum, pasang saja: saat pertama dibuka, kopinya otomatis masuk. Penjelajah baru juga dapat hadiah ☕ +3 dan 💎 +30.',
+      s3: 'Kalau tidak masuk, ketuk ☕ di gim → tab Undang, lalu tempel link ini.',
+      foot: 'Kopi dikirim lewat link saja, tanpa server'
+    },
+    ko: {
+      app: '월드 메모리', sub: '누산타라의 기억',
+      gTitle: '커피가 도착했어요!', gWho: '{name}님이 커피를 보냈어요',
+      qTitle: '커피 부탁이 왔어요', qWho: '{name}님이 커피 한 잔을 부탁해요',
+      noTitle: '인도네시아 역사 퍼즐 여행', noWho: '3매치 퍼즐로 만나는 인도네시아 역사 200장면',
+      meta: '스테이지 {s} · ★{st}', left: '{d}일 안에 받으세요', expired: '유효기간(7일)이 지난 링크예요. 친구에게 새 링크를 부탁해 보세요.',
+      openG: '☕ 앱에서 커피 받기', openQ: '☕ 앱에서 커피 보내기', openNo: '앱 열기',
+      install: 'Google Play에서 설치하기', installIos: 'iPhone 버전은 준비 중이에요',
+      copy: '링크 복사', copied: '복사했어요!',
+      desktop: '휴대폰에서 이 링크를 열어 주세요.',
+      s1: '게임이 있으면 위 버튼을 누르면 바로 커피함에 들어가요.',
+      s2: '게임이 없으면 설치하고 처음 열 때 커피가 자동으로 들어와요. 처음 시작하는 탐험가는 환영 선물(☕ +3, 💎 +30)도 받아요.',
+      s3: '자동으로 안 들어오면 게임의 ☕ 버튼 → 초대 탭에 이 링크를 붙여넣어 주세요.',
+      foot: '서버 없이 링크만으로 주고받는 커피예요'
+    },
+    en: {
+      app: 'World Memory', sub: 'Nusantara',
+      gTitle: 'Coffee arrived!', gWho: '{name} sent you a cup of coffee',
+      qTitle: 'Coffee request', qWho: '{name} is asking for a cup of coffee',
+      noTitle: 'A journey through Nusantara', noWho: '200 moments of Indonesian history in a match-3 puzzle',
+      meta: 'Stage {s} · ★{st}', left: 'Claim within {d} days', expired: 'This link is older than 7 days. Ask your friend for a new one.',
+      openG: '☕ Get it in the app', openQ: '☕ Send coffee in the app', openNo: 'Open the app',
+      install: 'Get it on Google Play', installIos: 'iPhone version coming soon',
+      copy: 'Copy link', copied: 'Copied!',
+      desktop: 'Open this link on your phone.',
+      s1: 'If you have the game, the button above puts the coffee straight into your coffee box.',
+      s2: 'No game yet? Install it: the coffee arrives the first time you open it. New explorers also get ☕ +3 and 💎 +30.',
+      s3: 'If it does not arrive, tap ☕ in the game → Invite and paste this link.',
+      foot: 'Coffee sent by link only, no server'
+    }
+  };
+  var lang = (navigator.language || 'id');
+  lang = /^ko/i.test(lang) ? 'ko' : /^(id|in|ms)/i.test(lang) ? 'id' : 'en';
+  document.documentElement.lang = lang;
+  function t(k, v) {
+    var s = (T[lang] && T[lang][k]) || T.en[k] || k;
+    for (var x in (v || {})) s = s.split('{' + x + '}').join(v[x]);
+    return s;
+  }
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  // same format as web/js/coffee.js (only read here, the game checks every rule)
+  function decode(code) {
+    var m = /^([A-Za-z0-9_-]{8,900})\.([a-z0-9]{4,14})$/.exec(code || '');
+    if (!m) return null;
+    try {
+      var b = m[1].replace(/-/g, '+').replace(/_/g, '/'); while (b.length % 4) b += '=';
+      var p = JSON.parse(decodeURIComponent(escape(atob(b))));
+      return p && (p.k === 'g' || p.k === 'q') ? p : null;
+    } catch (e) { return null; }
+  }
+  function dayNo(ts) { return Math.floor((ts - new Date(ts).getTimezoneOffset() * 60000) / 86400000); }
+
+  var q = /[?&#]c=([^&#]+)/.exec(location.search + location.hash);
+  var code = q ? decodeURIComponent(q[1]) : '';
+  var p = decode(code);
+  var ua = navigator.userAgent || '';
+  var android = /Android/i.test(ua), ios = /iPhone|iPad|iPod/i.test(ua);
+  var play = 'https://play.google.com/store/apps/details?id=' + PKG + (p ? '&referrer=' + encodeURIComponent('wmgift=' + code) : '');
+
+  $('app').textContent = t('app'); $('sub').textContent = t('sub'); $('foot').textContent = t('foot');
+  var kind = p ? p.k : 'no';
+  $('title').textContent = t(kind + 'Title');
+  if (p) {
+    var name = String(p.n || '').slice(0, 24) || '?';
+    $('who').innerHTML = esc(t(kind + 'Who', { name: name }));
+    $('av').textContent = AV[(p.a | 0) % AV.length];
+    $('cup').textContent = p.k === 'q' ? '🙏' : '☕';
+    var left = 7 - (dayNo(Date.now()) - p.d);
+    $('meta').textContent = t('meta', { s: p.s || 0, st: p.st || 0 }) + ' · ' + (left >= 0 ? t('left', { d: Math.max(1, left) }) : '');
+    if (left < 0) { $('meta').textContent = t('expired'); }
+  } else {
+    $('who').textContent = t('noWho');
+    $('cup').classList.add('hidden');
+  }
+
+  var open = $('open'), install = $('install');
+  open.textContent = t(p ? (p.k === 'q' ? 'openQ' : 'openG') : 'openNo');
+  install.textContent = ios ? t('installIos') : t('install');
+  var scheme = 'worldmemory://gift' + (p ? '?c=' + code : '');
+  if (android) {
+    open.href = 'intent://gift' + (p ? '?c=' + code : '') + '#Intent;scheme=worldmemory;package=' + PKG + ';S.browser_fallback_url=' + encodeURIComponent(play) + ';end';
+    install.href = play;
+  } else if (ios) {
+    open.href = scheme;
+    install.removeAttribute('href'); install.classList.add('gray');
+  } else {
+    open.classList.add('hidden');
+    install.href = play;
+    $('meta').textContent = ($('meta').textContent ? $('meta').textContent + ' · ' : '') + t('desktop');
+  }
+  if (p) {
+    var steps = ['s1', 's2', 's3'].map(function (k) { return '<li>' + esc(t(k)) + '</li>'; }).join('');
+    $('steps').innerHTML = steps;
+    var cp = $('copy'); cp.textContent = '🔗 ' + t('copy'); cp.classList.remove('hidden');
+    cp.onclick = function () {
+      var done = function () { cp.textContent = '✓ ' + t('copied'); };
+      if (navigator.clipboard) navigator.clipboard.writeText(location.href).then(done, done); else done();
+    };
+  } else $('steps').classList.add('hidden');
+})();
+</script>
+</body>
+</html>
